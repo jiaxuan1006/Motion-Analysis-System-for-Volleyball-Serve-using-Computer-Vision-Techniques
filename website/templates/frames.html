@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+Frames
+{% endblock %}
+
+{% block content %}
+<h1 align="center" style="color: white;">Frames for {{ filename }}</h1>
+
+<div class="frames-container">
+    {% for frame in frames %}
+        <div class="frame">
+            <img src="{{ url_for('static', filename=frame) }}" alt="Frame {{ loop.index }}">
+        </div>
+    {% endfor %}
+</div>
+
+<div class="button-container">
+    <a href="{{ url_for('views.result', filename=filename) }}" class="btn btn-primary">Back to Video</a>
+</div>
+
+<style>
+    .frames-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Centers items horizontally */
+    }
+    .frame {
+        flex: 0 0 auto; /* Ensures items are not flexible in size */
+        margin: 5px;
+        text-align: center; /* Centers image within each frame */
+    }
+    .frame img {
+        max-width: 50%;
+        height: auto;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; /* Adjust margin as needed */
+    }
+    .btn {
+        background-color: #007bff; /* Change button color as needed */
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    .btn:hover {
+        background-color: #0056b3; /* Change hover color as needed */
+    }
+</style>
+{% endblock %}

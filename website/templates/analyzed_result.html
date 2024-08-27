@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+Analyzed Results
+{% endblock %}
+
+{% block content %}
+<h1 align="center" style="color: white;">Analyzed Results</h1>
+<div class="row">
+  {% for video in processed_videos %}
+  <div class="col-md-4">
+    <div class="card mb-4 shadow-sm">
+      <video width="100%" controls>
+        <source src="{{ url_for('views.download_file', filename=video.filename) }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="card-body">
+        <p class="card-text">{{ video.filename }}</p>
+        <div class="btn-group">
+          <a href="{{ url_for('views.result', filename=video.filename) }}" class="btn btn-primary">View Result</a>
+          <a href="{{ url_for('views.download_result', filename=video.filename) }}" class="btn btn-primary">Download Result</a>
+          <button onclick="deleteResult('{{ video.filename }}')" class="btn btn-danger">Delete Result</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<a href="{{ url_for('views.lobby') }}" class="btn btn-primary">Back to Lobby</a>
+
+<script>
+    function deleteResult(filename) {
+        fetch('/delete-result', {
+            method: 'POST',
+            body: JSON.stringify({ filename: filename }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                console.error('Failed to delete result');
+            }
+        });
+    }
+</script>
+{% endblock %}

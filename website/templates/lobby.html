@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+Lobby
+{% endblock %}
+
+{% block content %}
+<div class="lobbycon">
+    <h1>Main Dashboard</h1>
+    <h1>Welcome, {{ user.first_name }}!</h1>
+    <div class="button-container" style="color: white;">
+        <a href="{{ url_for('views.home') }}" class="btn" style="color: white;">Upload Video</a>
+        <a href="{{ url_for('views.analyzed_results') }}" class="btn" style="color: white;">View Analyzed Results</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}
+Result
+{% endblock %}
+
+{% block content %}
+<h1 align="center" style="color: white;">Result Page</h1>
+<p style="color: white;">Filename: {{ filename }}</p>
+<video width="100%" controls>
+    <source src="{{ url_for('static', filename='results/' + filename) }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<div class="button-container">
+    <a href="{{ url_for('views.download_result', filename=filename) }}" class="btn btn-primary">Download Video</a>
+    <button onclick="deleteResult('{{ filename }}')" class="btn btn-danger">Delete Result</button>
+    <a href="{{ url_for('views.analyzed_results') }}" class="btn btn-secondary custom-green">Back to Results Page</a>
+    <a href="{{ url_for('views.show_frames', filename=filename) }}" class="btn btn-secondary custom-burlywood">Show Frames</a>
+</div>
+
+<script>
+    function deleteResult(filename) {
+        fetch('/delete-result', {
+            method: 'POST',
+            body: JSON.stringify({ filename: filename }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = "{{ url_for('views.home') }}";
+            } else {
+                console.error('Failed to delete result');
+            }
+        });
+    }
+</script>
+
+<style>
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; /* Adjust margin as needed */
+    }
+    .btn {
+        margin: 5px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: none;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+    }
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+    .btn-secondary {
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .custom-green {
+        background-color: green;
+        color: white;
+    }
+
+    .custom-green:hover {
+        background-color: darkgreen; /* Darken the background color on hover */
+    }
+
+    .custom-burlywood {
+        background-color: burlywood;
+        color: black; /* Adjust text color for better contrast */
+    }
+
+    .custom-burlywood:hover {
+        background-color: sandybrown; /* Change to a lighter shade on hover */
+    }
+</style>
+
+{% endblock %}

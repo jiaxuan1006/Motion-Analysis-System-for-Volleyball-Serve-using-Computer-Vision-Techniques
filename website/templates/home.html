@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<div class="upload-box">
+    <form class="form-signin col-lg-3" method="post" enctype="multipart/form-data" name="form1" onsubmit="return validateForm()" style="color: white;">
+        <h1 align="center" style="color: white;">Upload A Video</h1>
+        <input type="file" name="file" class="form-control-file" id="inputfile">
+        <br/>
+        <button class="btn btn-block btn-default btn-sm" type="submit" style="color: white">Upload</button>
+    </form>
+</div>
+
+<h1 align="center" style="color: white;">Uploaded Videos</h1>
+<div class="row">
+    {% for video in videos %}
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <video width="100%" controls>
+                <source src="{{ url_for('static', filename=video.filepath) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="card-body">
+                <p class="card-text">{{ video.filename }}</p>
+                <button type="button" class="btn btn-danger" onClick="deleteVideo('{{ video.id }}')">Delete</button>
+                <a href="{{ url_for('views.process_video', video_id=video.id) }}" id="process-btn-{{ video.id }}" class="btn btn-primary" onclick="handleProcessClick('{{ video.id }}')">Process</a>
+                <span id="loading-{{ video.id }}" class="loading-spinner" style="margin-left: 5px; display: none;">Processing...</span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+function deleteVideo(videoId) {
+    fetch('/delete-video', {
+        method: 'POST',
+        body: JSON.stringify({ videoId: videoId }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            console.error('Failed to delete video');
+        }
+    });
+}
+
+function handleProcessClick(videoId) {
+    var processBtn = document.getElementById('process-btn-' + videoId);
+    var loadingSpinner = document.getElementById('loading-' + videoId);
+
+    // Show loading spinner
+    loadingSpinner.style.display = 'inline-block';
+
+    // Disable process button
+    processBtn.disabled = true;
+
+    // Optional: Hide process button text
+    processBtn.innerHTML = '';
+}
+
+function validateForm() {
+    var fileInput = document.getElementById('inputfile');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.mp4)$/i;
+
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Please upload a file with an MP4 extension.');
+        fileInput.value = '';
+        return false;
+    }
+    return true;
+}
+</script>
+{% endblock %}
