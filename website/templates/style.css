@@ -1,0 +1,47 @@
+/* static/style.css */
+body {
+    background-color: #f0f0f0;  /* Change to your desired background color */
+    background-image: url('/static/images/background_all.png'); /* Change to your desired background image */
+    background-size: cover; /* Ensure the image covers the whole background */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-attachment: fixed; /* Make sure the background image stays fixed on scroll */
+    color: white;
+}
+
+.lobbycon {
+    text-align: center;
+    padding: 50px;
+    color: white;
+}
+
+.button-container {
+    margin-top: 20px;
+    color: white;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+
+
+.upload-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
