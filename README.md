@@ -8,7 +8,9 @@ The website of the system is developed using Flask Python, DATABASE stored using
 
 ## Installation and Setup
 
+```bash
 Installed Python version 3.11 or above.
+```
 
 ```bash
 git clone <repo-url>
