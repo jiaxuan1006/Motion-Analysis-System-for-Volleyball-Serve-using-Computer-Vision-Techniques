@@ -29,3 +29,13 @@ python main.py
 ## Viewing The App
 
 Go to `http://127.0.0.1:5000`
+
+## Example of the Result of Analysis
+
+![image](https://github.com/user-attachments/assets/4982575a-40a4-48bf-ae93-0ae444b4033c)
+![image](https://github.com/user-attachments/assets/b14e93f5-be94-493f-8861-cdc37ede7c02)
+![image](https://github.com/user-attachments/assets/b235d917-dc16-4ed4-89fb-249381908cb7)
+![image](https://github.com/user-attachments/assets/df2f6d01-45b9-4216-9526-a96da0057dd7)
+
+
+
