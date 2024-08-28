@@ -1,0 +1,8 @@
+flask
+Flask-SQLAlchemy
+flask-login
+flask_migrate
+opencv-python
+opencv-contrib-python
+mediapipe
+numpy
