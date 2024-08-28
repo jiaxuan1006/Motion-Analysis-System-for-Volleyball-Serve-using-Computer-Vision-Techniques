@@ -30,6 +30,10 @@ python main.py
 
 Go to `http://127.0.0.1:5000`
 
+## Process volleyball serve motion analysis
+
+Select one of the videos in Examples and upload to the system. 
+
 ## Example of the Result of Analysis
 
 ![image](https://github.com/user-attachments/assets/4982575a-40a4-48bf-ae93-0ae444b4033c)
